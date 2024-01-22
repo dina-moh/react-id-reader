@@ -27,9 +27,82 @@ export default function IdReader () {
     });
   }
 
+  const bkgImg = "https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp";
 
   return (
-    <div>
+
+    <>
+      <section class="vh-100 bg-image"
+  style={{backgroundImage: `${bkgImg}`}}>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style={{borderRadius: "15px"}}>
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Submit a Request</h2>
+
+              <form>
+                
+                <div class="form-outline mb-4">
+                  <Dropzone onDrop={handleImageUpload} accept="image/*">
+                    {({ getRootProps, getInputProps }) => (
+                      <div {...getRootProps()} style={dropzoneStyle}>
+                        <input {...getInputProps()} />
+                        <p>Drag & drop an ID photo here, or click to select one</p>
+                      </div>
+                    )}
+                  </Dropzone>
+                </div>
+
+                {uploadedImage && (
+                  <div className="form-outline mb-4">
+                  <img src={uploadedImage} alt="Uploaded ID" style={imageStyle} />
+                  </div>
+                )}
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="">Civil ID</label>
+                  <input type="text" class="form-control form-control-md" value={idNumber} disabled/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="">Full Name</label>
+                  <input type="text" class="form-control form-control-md" disabled/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cdg">Customer Type</label>
+                  <select id="" class="form-control form-control-md">
+                    <option value="1">Type 1</option>
+                    <option value="1">Type 2</option>
+                    <option value="1">Type 3</option>
+                  </select>
+                </div>
+{/* 
+                <div class="form-check d-flex justify-content-center mb-5">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                  <label class="form-check-label" for="form2Example3g">
+                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                  </label>
+                </div> */}
+
+                <div class="d-flex justify-content-center">
+                  <button type="button"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Old Working Code */}
+
+{/* <div className="container mt-4">
       <Dropzone onDrop={handleImageUpload} accept="image/*">
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} style={dropzoneStyle}>
@@ -39,22 +112,25 @@ export default function IdReader () {
         )}
       </Dropzone>
       
-      <label>ID Number</label>
-            {/* <p>ID Number: {idNumber}</p> */}
+      <h3 className="mt-4">ID Number</h3>
+            <p>ID Number: {idNumber}</p>
             <input type="text" value={idNumber} disabled placeholder='Automatically Populated'/>
 
-            <label>Full Name</label>
+            <h3 className="mt-4">Full Name</h3>
             <input type="text" disabled placeholder='Automatically Populated'/>
 
       {uploadedImage && (
-        <div>
+        <div className="mt-4">
           <img src={uploadedImage} alt="Uploaded ID" style={imageStyle} />
           <div>
           </div>
           
         </div>
       )}
-    </div>
+    </div> */}
+
+    </>
+
   );
 }
 

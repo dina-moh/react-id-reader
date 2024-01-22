@@ -38,14 +38,20 @@ export default function IdReader () {
           </div>
         )}
       </Dropzone>
+      
+      <label>ID Number</label>
+            {/* <p>ID Number: {idNumber}</p> */}
+            <input type="text" value={idNumber} disabled placeholder='Automatically Populated'/>
+
+            <label>Full Name</label>
+            <input type="text" disabled placeholder='Automatically Populated'/>
 
       {uploadedImage && (
         <div>
           <img src={uploadedImage} alt="Uploaded ID" style={imageStyle} />
           <div>
-            <h3>ID Number</h3>
-            <p>ID Number: {idNumber}</p>
           </div>
+          
         </div>
       )}
     </div>

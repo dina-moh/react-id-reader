@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Tesseract from "tesseract.js";
 import Dropzone from "react-dropzone";
 
+
+const primary ="#cccccc";
+const white = "#ffff"
+const secondary = "#be5504";
+const bgUrl = "https://images.unsplash.com/photo-1528731708534-816fe59f90cb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWluaW1hbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D";
+
+
 export default function IdReader() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [idNumber, setIdNumber] = useState("");
@@ -38,20 +45,16 @@ export default function IdReader() {
 
   function handleCusTypeChange(e) {
     setCusType(e.target.value);
-    // alert(e.target.value)
   }
 
   function handleGenerateQRCode() {
     navigate("/qrcode", { state: { idNumber, name, cusType } });
   }
 
-  const bkgImg =
-    "https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp";
-
   return (
     <>
             
-      <section className="vh-100 bg-image" style={{ backgroundImage: `${bkgImg}` }}>
+      <section className="vh-100 " style={bgImg}>
           
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
               
@@ -66,7 +69,7 @@ export default function IdReader() {
                   <div className="card-body p-5">
                                   
                     <h2 className="text-uppercase text-center mb-5">
-                      Submit a Request
+                      Demo Service Request
                     </h2>
                                   
                     <form>
@@ -109,6 +112,7 @@ export default function IdReader() {
                           type="text"
                           className="form-control form-control-md"
                           value={idNumber}
+                          placeholder="Civil ID captured form photo ID"
                           disabled
                         />
                                         
@@ -124,6 +128,7 @@ export default function IdReader() {
                           type="text"
                           className="form-control form-control-md"
                           value={name}
+                          placeholder="Full Name captured form photo ID"
                           disabled
                         />
                                         
@@ -136,9 +141,9 @@ export default function IdReader() {
                         </label>
                                           
                         <select id="" className="form-control form-control-md" value={cusType} onChange={handleCusTypeChange}>
-                                              <option value="1">Type 1</option>
-                                              <option value="2">Type 2</option>
-                                              <option value="3">Type 3</option>
+                          <option value="1">Type 1</option>
+                          <option value="2">Type 2</option>
+                          <option value="3">Type 3</option>
                                             
                         </select>
                                         
@@ -148,7 +153,8 @@ export default function IdReader() {
                                           
                         <button
                           type="button"
-                          className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                          className="btn btn-block btn-lg gradient-custom-4 text-body"
+                          style={btnColor}
                           onClick={handleGenerateQRCode}
                         >
                           Register
@@ -180,7 +186,7 @@ export default function IdReader() {
 // };
 
 const dropzoneStyle = {
-  border: "2px dashed #cccccc",
+  border: `2px dashed ${primary}`,
   borderRadius: "4px",
   padding: "20px",
   textAlign: "center",
@@ -191,3 +197,12 @@ const imageStyle = {
   marginTop: "20px",
   maxWidth: "100%",
 };
+
+const btnColor = {
+  backgroundColor: `${secondary}`,
+  color: `${white}`,
+};
+
+const bgImg = {
+  backgroundImage: `url(${bgUrl})`
+}

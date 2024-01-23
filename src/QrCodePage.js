@@ -2,22 +2,33 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import QRCode from 'qrcode.react';
 
-const QrCodePage = () => {
+export default function QrCodePage () {
   const location = useLocation();
-  const { idNumber, fullName } = location.state || {};
+  const { idNumber, name } = location.state || {};
 
   return (
-    <div className="container mt-4">
-      <h3>Generated QR Code</h3>
-      {idNumber && fullName && (
-        <div>
-          <p>ID Number: {idNumber}</p>
-          <p>Full Name: {fullName}</p>
-          <QRCode value={`${idNumber} ${fullName}`} size={200} />
+    <section className="vh-100 bg-image">
+         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+          <div className="container h-100">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+              <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div className="card" style={{borderRadius: "15px"}}>
+                  <div className="card-body p-5">
+                    <h2 className="text-uppercase text-center mb-5">Generated QR Code</h2>
+                    {idNumber && name && (
+                      <div>
+                        <p>ID Number: {idNumber}</p>
+                        <p>Full Name: {name}</p>
+                        <QRCode value={`${idNumber} ${name}`} size={200} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+    </section>
+    
   );
-};
-
-export default QrCodePage;
+}

@@ -7,6 +7,7 @@ export default function IdReader() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [idNumber, setIdNumber] = useState("");
   const [name, setName] = useState("");
+  const [cusType, setCusType] = useState(null);
   const navigate = useNavigate(); // Using useNavigate
 
   function handleImageUpload(acceptedFiles) {
@@ -35,8 +36,13 @@ export default function IdReader() {
     });
   }
 
+  function handleCusTypeChange(e) {
+    setCusType(e.target.value);
+    // alert(e.target.value)
+  }
+
   function handleGenerateQRCode() {
-    navigate("/qrcode", { state: { idNumber, name } });
+    navigate("/qrcode", { state: { idNumber, name, cusType } });
   }
 
   const bkgImg =
@@ -129,10 +135,10 @@ export default function IdReader() {
                           Customer Type
                         </label>
                                           
-                        <select id="" className="form-control form-control-md">
+                        <select id="" className="form-control form-control-md" value={cusType} onChange={handleCusTypeChange}>
                                               <option value="1">Type 1</option>
-                                              <option value="1">Type 2</option>
-                                              <option value="1">Type 3</option>
+                                              <option value="2">Type 2</option>
+                                              <option value="3">Type 3</option>
                                             
                         </select>
                                         

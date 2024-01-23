@@ -4,7 +4,7 @@ import QRCode from 'qrcode.react';
 
 export default function QrCodePage () {
   const location = useLocation();
-  const { idNumber, name } = location.state || {};
+  const { idNumber, name, cusType } = location.state || {};
 
   return (
     <section className="vh-100 bg-image">
@@ -19,7 +19,8 @@ export default function QrCodePage () {
                       <div>
                         <p>ID Number: {idNumber}</p>
                         <p>Full Name: {name}</p>
-                        <QRCode value={`${idNumber} ${name}`} size={200} />
+                        <p>Customer Type: {cusType}</p>
+                        <QRCode value={`${idNumber} ${name} ${cusType}`} size={200} />
                       </div>
                     )}
                   </div>

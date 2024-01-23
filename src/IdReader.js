@@ -7,7 +7,7 @@ export default function IdReader () {
   const [idNumber, setIdNumber] = useState('');
   const [name, setName] = useState('');
 
-function handleImageUpload (acceptedFiles) {
+function handleImageUpload(acceptedFiles) {
   const imageFile = acceptedFiles[0];
   setUploadedImage(URL.createObjectURL(imageFile));
 
@@ -17,17 +17,24 @@ function handleImageUpload (acceptedFiles) {
     { logger: (info) => console.log(info) }
   ).then(({ data: { text } }) => {
     const lines = text.split('\n');
-    const id = lines[lines.length - 4 ]
-    const idNumberMatch = id.match(/\d+/); // Match all consecutive number
-    setIdNumber(idNumberMatch[0]);
-    
-    //needs to be done so for demo purposes since the name 
-    const nameLine = lines[ lines.length - 2 ];  
-    const nameComponents = nameLine.replace(/<+/g, ' ').split('<');
-    const fullName = nameComponents.filter(component => component.trim() !== '').join(' ');
-    setName(fullName);
+
+    // Extract ID number from the fourth-to-last line
+    const idLine = lines[lines.length - 4];
+    const idNumberMatch = idLine.match(/\d+/); // Match all consecutive numbers
+    if (idNumberMatch) {
+      const extractedIdNumber = idNumberMatch[0];
+      setIdNumber(extractedIdNumber);
+    }
+
+    // Extract full name from the last line and replace "<" with " "
+    const lastLine = lines[lines.length - 2];
+    const cleanedFullName = lastLine.replace(/<+/g, ' ').trim();
+
+    console.log("Cleaned Name" + cleanedFullName);
+    setName(cleanedFullName);
   });
 }
+
 
   const bkgImg = "https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp";
 

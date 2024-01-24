@@ -12,7 +12,7 @@ const bgUrl = "https://images.unsplash.com/photo-1528731708534-816fe59f90cb?q=80
 
 export default function IdReader() {
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [idNumber, setIdNumber] = useState("");
+  const [idNumber, setIdNumber] = useState(null);
   const [name, setName] = useState("");
   const [cusType, setCusType] = useState(null);
   const navigate = useNavigate(); // Using useNavigate
@@ -31,7 +31,7 @@ export default function IdReader() {
       const idNumberMatch = idLine.match(/\d+/); // Match all consecutive numbers
       if (idNumberMatch) {
         const extractedIdNumber = idNumberMatch[0];
-        setIdNumber(extractedIdNumber);
+        setIdNumber(Number(extractedIdNumber));
       }
 
       // Extract full name from the last line and replace "<" with " "
@@ -48,6 +48,7 @@ export default function IdReader() {
   }
 
   function handleGenerateQRCode() {
+    
     navigate("/qrcode", { state: { idNumber, name, cusType } });
   }
 
